@@ -19,7 +19,8 @@ export class Utils {
     return parsedOrigin.domain === parsedTarget.domain;
   }
 
-  matchDomainPattern(url: string, domainPattern: string): boolean {
+  matchDomainPattern(url: string, domainPattern?: string): boolean {
+    if (!domainPattern) return true;
     if (domainPattern.startsWith('/')) {
       const regexp = domainPattern.match(/^\s*\/(.*)\/([gimsuy]+)?\s*$/);
       if (!regexp) {

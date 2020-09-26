@@ -6,7 +6,7 @@ preferencesTestSet.map((preferences) => {
     let bg: Background, tab: Tab;
 
     const defaultIsolationDomainPreferences: IsolationDomain = {
-      pattern: '',
+      targetPattern: '',
       always: {
         action: 'disabled',
         allowedInPermanent: false,
@@ -94,7 +94,7 @@ preferencesTestSet.map((preferences) => {
                       bg.tmp.storage.local.preferences.isolation.domain = [
                         {
                           ...defaultIsolationDomainPreferences,
-                          pattern: 'example.com',
+                          targetPattern: 'example.com',
                           navigation: {
                             action: 'never',
                           },
@@ -149,7 +149,7 @@ preferencesTestSet.map((preferences) => {
                       bg.tmp.storage.local.preferences.isolation.domain = [
                         {
                           ...defaultIsolationDomainPreferences,
-                          pattern: 'example.com',
+                          targetPattern: 'example.com',
                           navigation: {
                             action: 'always',
                           },
@@ -204,7 +204,7 @@ preferencesTestSet.map((preferences) => {
                         bg.tmp.storage.local.preferences.isolation.domain = [
                           {
                             ...defaultIsolationDomainPreferences,
-                            pattern: 'example.com',
+                            targetPattern: 'example.com',
                             excluded: {
                               'excluded.com': {},
                             },
@@ -236,7 +236,7 @@ preferencesTestSet.map((preferences) => {
                       bg.tmp.storage.local.preferences.isolation.domain = [
                         {
                           ...defaultIsolationDomainPreferences,
-                          pattern: 'example.com',
+                          targetPattern: 'example.com',
                           navigation: {
                             action: 'notsamedomain',
                           },
@@ -305,7 +305,7 @@ preferencesTestSet.map((preferences) => {
                       bg.tmp.storage.local.preferences.isolation.domain = [
                         {
                           ...defaultIsolationDomainPreferences,
-                          pattern: 'example.com',
+                          targetPattern: 'example.com',
                           navigation: {
                             action: 'notsamedomainexact',
                           },
@@ -524,7 +524,7 @@ preferencesTestSet.map((preferences) => {
                 bg.tmp.storage.local.preferences.isolation.domain = [
                   {
                     ...defaultIsolationDomainPreferences,
-                    pattern: 'example.com',
+                    targetPattern: 'example.com',
                     always: {
                       action: 'enabled',
                       allowedInPermanent: false,

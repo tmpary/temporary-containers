@@ -84,7 +84,8 @@ export interface IsolationGlobal {
 }
 
 export interface IsolationDomain extends IsolationGlobal {
-  pattern: string;
+  targetPattern: string;
+  originPattern?: string;
   always: {
     action: 'enabled' | 'disabled';
     allowedInPermanent: boolean;
@@ -279,3 +280,10 @@ export interface WebRequestOnBeforeRequestDetails
   extends browser.webRequest._OnBeforeRequestDetails {
   cookieStoreId: string;
 }
+
+export interface ToolTip {
+  hidden: boolean;
+  position?: 'bottom left' | 'top left';
+}
+
+export type DomainPatternType = 'target' | 'origin' | 'exclusion';

@@ -84,7 +84,7 @@ export class Migration {
         perDomainIsolation.push(
           Object.assign(
             {
-              pattern: domainPattern,
+              targetPattern: domainPattern,
             },
             preferences.isolation.domain[domainPattern]
           )

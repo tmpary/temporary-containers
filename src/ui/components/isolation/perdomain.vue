@@ -8,7 +8,8 @@ import { mixin } from '~/ui/mixin';
 import { IsolationDomain } from '~/types';
 
 const domainDefaults = {
-  pattern: '',
+  originPattern: '',
+  targetPattern: '',
   always: {
     action: 'disabled',
     allowedInPermanent: false,
@@ -69,7 +70,7 @@ export default mixins(mixin).extend({
       get(): UIIsolationDomain[] {
         return this.preferences.isolation.domain.reduce(
           (accumulator: UIIsolationDomain[], isolated, index) => {
-            if (!isolated.pattern.includes(this.isolationDomainFilter)) {
+            if (!isolated.targetPattern.includes(this.isolationDomainFilter)) {
               return accumulator;
             }
             accumulator.push({ ...isolated, _index: index });
@@ -87,17 +88,17 @@ export default mixins(mixin).extend({
   watch: {
     domain: {
       handler(domain): void {
-        if (this.editing && !domain.pattern.trim()) {
+        if (this.editing && !domain.targetPattern.trim()) {
           this.editing = false;
           this.domain = this.clone(domain);
           const domainIndex = this.preferences.isolation.domain.findIndex(
-            (isolatedDomain) => !isolatedDomain.pattern.trim()
+            (isolatedDomain) => !isolatedDomain.targetPattern.trim()
           );
           this.$delete(this.preferences.isolation.domain, domainIndex);
         } else if (
           !this.editing &&
           this.preferences.isolation.domain.find(
-            (_domain) => _domain.pattern === domain.pattern
+            (_domain) => _domain.targetPattern === domain.targetPattern
           )
         ) {
           $('#isolationDomainForm').form('validate form');
@@ -144,7 +145,7 @@ export default mixins(mixin).extend({
         return true;
       } else {
         return !this.preferences.isolation.domain.find(
-          (domain) => domain.pattern === value
+          (domain) => domain.targetPattern === value
         );
       }
     };
@@ -152,15 +153,14 @@ export default mixins(mixin).extend({
     $('#isolationDomainForm').form({
       inline: true,
       fields: {
-        isolationDomainPattern: {
+        originDomainPattern: {
+          rules: [],
+        },
+        targetDomainPattern: {
           rules: [
             {
               type: 'empty',
               prompt: this.t('optionsIsolationPerDomainPatternNoEmpty'),
-            },
-            {
-              type: 'domainPattern',
-              prompt: this.t('optionsIsolationPerDomainPatternExists'),
             },
           ],
         },
@@ -174,7 +174,7 @@ export default mixins(mixin).extend({
           this.reset();
           this.editing = false;
         } else {
-          this.domain.pattern = this.domain.pattern.trim();
+          this.domain.targetPattern = this.domain.targetPattern.trim();
           this.preferences.isolation.domain.push(this.clone(this.domain));
           this.reset();
         }
@@ -197,19 +197,21 @@ export default mixins(mixin).extend({
         return;
       }
       const isolationDomainIndex = this.preferences.isolation.domain.findIndex(
-        (domain) => domain.pattern === this.app.activeTab?.parsedUrl.hostname
+        (domain) =>
+          domain.targetPattern === this.app.activeTab?.parsedUrl.hostname
       );
       if (isolationDomainIndex >= 0) {
         this.edit(isolationDomainIndex);
       } else {
-        this.domain.pattern = this.app.activeTab.parsedUrl.hostname;
+        this.domain.targetPattern = this.app.activeTab.parsedUrl.hostname;
       }
     }
   },
   methods: {
     reset(): void {
       this.domain = this.clone(domainDefaults);
-      this.domain.pattern = '';
+      this.domain.targetPattern = '';
+      this.domain.originPattern = '';
       this.$nextTick(() => {
         this.empty = true;
       });
@@ -267,7 +269,7 @@ export default mixins(mixin).extend({
         )
       ) {
         this.$delete(this.preferences.isolation.domain, index);
-        if (this.editing && this.domain.pattern === pattern) {
+        if (this.editing && this.domain.targetPattern === pattern) {
           this.reset();
           this.editing = false;
         }
@@ -312,25 +314,21 @@ export default mixins(mixin).extend({
 });
 </script>
 
-<style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
-
 <template>
   <div v-show="show" id="isolationDomain">
     <div class="ui form">
       <form id="isolationDomainForm">
         <domain-pattern
-          id="isolationDomainPattern"
+          id="originDomainPattern"
+          :type="'origin'"
           :tooltip="!popup ? undefined : { hidden: true }"
-          :domain-pattern.sync="domain.pattern"
+          :domain-pattern.sync="domain.originPattern"
+        />
+        <domain-pattern
+          id="targetDomainPattern"
+          :type="'target'"
+          :tooltip="!popup ? undefined : { hidden: true }"
+          :domain-pattern.sync="domain.targetPattern"
         />
       </form>
       <div
@@ -454,7 +452,7 @@ export default mixins(mixin).extend({
                     !popup ? { position: 'top left' } : { hidden: true }
                   "
                   :domain-pattern.sync="excludeDomainPattern"
-                  :exclusion="true"
+                  :type="'exclusion'"
                 />
                 <div class="field">
                   <button class="ui button primary">
@@ -498,7 +496,7 @@ export default mixins(mixin).extend({
       <button
         form="isolationDomainForm"
         class="ui button primary"
-        :disabled="!domain.pattern.trim()"
+        :disabled="!domain.targetPattern.trim()"
       >
         <span v-if="editing">
           <transition name="fade">
@@ -507,12 +505,14 @@ export default mixins(mixin).extend({
               Saved
             </span>
             <span v-if="!saved">
-              {{ t('optionsIsolationPerDomainDoneEditing', domain.pattern) }}
+              {{
+                t('optionsIsolationPerDomainDoneEditing', domain.targetPattern)
+              }}
             </span>
           </transition>
         </span>
         <span v-else>
-          {{ t('optionsIsolationPerDomainAdd', domain.pattern) }}
+          {{ t('optionsIsolationPerDomainAdd', domain.targetPattern) }}
         </span>
       </button>
     </div>

@@ -1,6 +1,6 @@
 import { expect, preferencesTestSet, loadBackground } from './setup';
 
-preferencesTestSet.map(preferences => {
+preferencesTestSet.map((preferences) => {
   describe(`preferences: ${JSON.stringify(preferences)}`, () => {
     beforeEach(() => {
       // // eslint-disable-next-line require-atomic-updates
@@ -350,7 +350,7 @@ preferencesTestSet.map(preferences => {
         background.storage.local.preferences.isolation.domain = [
           {
             ...background.preferences.defaults.isolation.global,
-            pattern: 'example.com',
+            targetPattern: 'example.com',
             mouseClick: {
               ...background.preferences.defaults.isolation.global.mouseClick,
               middle: {
@@ -394,7 +394,7 @@ preferencesTestSet.map(preferences => {
         background.storage.local.preferences.isolation.domain = [
           {
             ...background.preferences.defaults.isolation.global,
-            pattern: 'example.com',
+            targetPattern: 'example.com',
             mouseClick: {
               ...background.preferences.defaults.isolation.global.mouseClick,
               middle: {
@@ -438,7 +438,7 @@ preferencesTestSet.map(preferences => {
         background.storage.local.preferences.isolation.domain = [
           {
             ...background.preferences.defaults.isolation.global,
-            pattern: 'example.com',
+            targetPattern: 'example.com',
             mouseClick: {
               ...background.preferences.defaults.isolation.global.mouseClick,
               middle: {
@@ -482,7 +482,7 @@ preferencesTestSet.map(preferences => {
         background.storage.local.preferences.isolation.domain = [
           {
             ...background.preferences.defaults.isolation.global,
-            pattern: 'example.com',
+            targetPattern: 'example.com',
             mouseClick: {
               ...background.preferences.defaults.isolation.global.mouseClick,
               middle: {
@@ -526,7 +526,7 @@ preferencesTestSet.map(preferences => {
         background.storage.local.preferences.isolation.domain = [
           {
             ...background.preferences.defaults.isolation.global,
-            pattern: 'example.com',
+            targetPattern: 'example.com',
             mouseClick: {
               ...background.preferences.defaults.isolation.global.mouseClick,
               middle: {
@@ -572,7 +572,7 @@ preferencesTestSet.map(preferences => {
         background.storage.local.preferences.isolation.domain = [
           {
             ...background.preferences.defaults.isolation.global,
-            pattern: 'whynotexample.com',
+            targetPattern: 'whynotexample.com',
             mouseClick: {
               ...background.preferences.defaults.isolation.global.mouseClick,
               middle: {
@@ -618,7 +618,7 @@ preferencesTestSet.map(preferences => {
         background.storage.local.preferences.isolation.domain = [
           {
             ...background.preferences.defaults.isolation.global,
-            pattern: 'example.com',
+            targetPattern: 'example.com',
             mouseClick: {
               ...background.preferences.defaults.isolation.global.mouseClick,
               middle: {
@@ -662,7 +662,7 @@ preferencesTestSet.map(preferences => {
         background.storage.local.preferences.isolation.domain = [
           {
             ...background.preferences.defaults.isolation.global,
-            pattern: '*.example.com',
+            targetPattern: '*.example.com',
             mouseClick: {
               ...background.preferences.defaults.isolation.global.mouseClick,
               middle: {

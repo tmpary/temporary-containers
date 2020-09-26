@@ -5,7 +5,7 @@ import {
   expect,
 } from './setup';
 
-preferencesTestSet.map(preferences => {
+preferencesTestSet.map((preferences) => {
   describe(`preferences: ${JSON.stringify(preferences)}`, () => {
     let bg: Background;
     describe('Always Open In', () => {
@@ -14,7 +14,7 @@ preferencesTestSet.map(preferences => {
         bg.tmp.storage.local.preferences.isolation.domain = [
           {
             ...bg.tmp.storage.local.preferences.isolation.global,
-            pattern: 'example.com',
+            targetPattern: 'example.com',
             always: {
               action: 'enabled',
               allowedInPermanent: false,
@@ -23,7 +23,7 @@ preferencesTestSet.map(preferences => {
           },
           {
             ...bg.tmp.storage.local.preferences.isolation.global,
-            pattern: '*.notexample.com',
+            targetPattern: '*.notexample.com',
             always: {
               action: 'enabled',
               allowedInPermanent: false,
@@ -72,7 +72,7 @@ preferencesTestSet.map(preferences => {
         bg.tmp.storage.local.preferences.isolation.domain = [
           {
             ...bg.tmp.storage.local.preferences.isolation.global,
-            pattern: 'example.com',
+            targetPattern: 'example.com',
             always: {
               action: 'enabled',
               allowedInPermanent: true,

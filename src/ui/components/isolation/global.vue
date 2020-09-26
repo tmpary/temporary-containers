@@ -225,7 +225,7 @@ export default mixins(mixin).extend({
                     !popup ? { position: 'top left' } : { hidden: true }
                   "
                   :domain-pattern.sync="excludeDomainPattern"
-                  :exclusion="true"
+                  :type="'exclusion'"
                 />
                 <div class="field">
                   <button class="ui button primary">

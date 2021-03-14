@@ -562,11 +562,14 @@ export default mixins(mixin).extend({
           >
             <div
               v-for="isolatedDomain in isolationDomains"
-              :key="isolatedDomain.pattern"
+              :key="isolatedDomain.targetPattern"
             >
               <span
                 :data-tooltip="
-                  t('optionsIsolationPerDomainEdit', isolatedDomain.pattern)
+                  t(
+                    'optionsIsolationPerDomainEdit',
+                    isolatedDomain.targetPattern
+                  )
                 "
                 style="cursor: pointer;"
                 data-position="right center"
@@ -576,11 +579,16 @@ export default mixins(mixin).extend({
               </span>
               <span
                 :data-tooltip="
-                  t('optionsIsolationPerDomainRemove', isolatedDomain.pattern)
+                  t(
+                    'optionsIsolationPerDomainRemove',
+                    isolatedDomain.targetPattern
+                  )
                 "
                 data-position="right center"
                 style="color: red; cursor: pointer;"
-                @click="remove(isolatedDomain._index, isolatedDomain.pattern)"
+                @click="
+                  remove(isolatedDomain._index, isolatedDomain.targetPattern)
+                "
               >
                 <i class="icon-trash-empty" />
               </span>
@@ -599,7 +607,7 @@ export default mixins(mixin).extend({
                   style="color: #2185d0; margin-left: 3px; opacity: 0.8;"
                 />
               </span>
-              {{ isolatedDomain.pattern }}
+              {{ isolatedDomain.targetPattern }}
             </div>
           </draggable>
         </div>

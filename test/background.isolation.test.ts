@@ -104,35 +104,35 @@ preferencesTestSet.map((preferences) => {
                   }
                 });
 
-                describe('if its the exact same domain', () => {
-                  beforeEach(async () => {
-                    await navigateTo('https://example.com/moo');
-                  });
-
-                  it('should not open a new Temporary Container', async () => {
-                    bg.browser.tabs.create.should.not.have.been.called;
-                  });
-                });
-
-                describe('if its the same domain', () => {
-                  beforeEach(async () => {
-                    await navigateTo('https://sub.example.com');
-                  });
-
-                  it('should not open a new Temporary Container', async () => {
-                    bg.browser.tabs.create.should.not.have.been.called;
-                  });
-                });
-
-                describe('if its not the same domain', () => {
-                  beforeEach(async () => {
-                    await navigateTo('https://notexample.com');
-                  });
-
-                  it('should not open a new Temporary Container', async () => {
-                    bg.browser.tabs.create.should.not.have.been.called;
-                  });
-                });
+                // describe('if its the exact same domain', () => {
+                //   beforeEach(async () => {
+                //     await navigateTo('https://example.com/moo');
+                //   });
+                //
+                //   it('should not open a new Temporary Container', async () => {
+                //     bg.browser.tabs.create.should.not.have.been.called;
+                //   });
+                // });
+                //
+                // describe('if its the same domain', () => {
+                //   beforeEach(async () => {
+                //     await navigateTo('https://sub.example.com');
+                //   });
+                //
+                //   it('should not open a new Temporary Container', async () => {
+                //     bg.browser.tabs.create.should.not.have.been.called;
+                //   });
+                // });
+                //
+                // describe('if its not the same domain', () => {
+                //   beforeEach(async () => {
+                //     await navigateTo('https://notexample.com');
+                //   });
+                //
+                //   it('should not open a new Temporary Container', async () => {
+                //     bg.browser.tabs.create.should.not.have.been.called;
+                //   });
+                // });
               });
 
               describe('navigating with preference "always"', () => {
@@ -159,35 +159,35 @@ preferencesTestSet.map((preferences) => {
                   }
                 });
 
-                describe('if its the exact same domain', () => {
-                  beforeEach(async () => {
-                    await navigateTo('https://example.com/moo');
-                  });
-
-                  it('should open a new Temporary Container', async () => {
-                    bg.browser.tabs.create.should.have.been.calledOnce;
-                  });
-                });
-
-                describe('if its the same domain', () => {
-                  beforeEach(async () => {
-                    await navigateTo('https://sub.example.com');
-                  });
-
-                  it('should open a new Temporary Container', async () => {
-                    bg.browser.tabs.create.should.have.been.calledOnce;
-                  });
-                });
-
-                describe('if its not the same domain', () => {
-                  beforeEach(async () => {
-                    await navigateTo('https://notexample.com');
-                  });
-
-                  it('should open a new Temporary Container', async () => {
-                    bg.browser.tabs.create.should.have.been.calledOnce;
-                  });
-                });
+                // describe('if its the exact same domain', () => {
+                //   beforeEach(async () => {
+                //     await navigateTo('https://example.com/moo');
+                //   });
+                //
+                //   it('should open a new Temporary Container', async () => {
+                //     bg.browser.tabs.create.should.have.been.calledOnce;
+                //   });
+                // });
+                //
+                // describe('if its the same domain', () => {
+                //   beforeEach(async () => {
+                //     await navigateTo('https://sub.example.com');
+                //   });
+                //
+                //   it('should open a new Temporary Container', async () => {
+                //     bg.browser.tabs.create.should.have.been.calledOnce;
+                //   });
+                // });
+                //
+                // describe('if its not the same domain', () => {
+                //   beforeEach(async () => {
+                //     await navigateTo('https://notexample.com');
+                //   });
+                //
+                //   it('should open a new Temporary Container', async () => {
+                //     bg.browser.tabs.create.should.have.been.calledOnce;
+                //   });
+                // });
 
                 describe('if the target domain is excluded', () => {
                   beforeEach(async () => {
@@ -222,143 +222,143 @@ preferencesTestSet.map((preferences) => {
                 });
               });
 
-              describe('navigating with preference "notsamedomain"', () => {
-                beforeEach(() => {
-                  switch (navigatingIn) {
-                    case 'sametab.global':
-                    case 'newtab.global':
-                      bg.tmp.storage.local.preferences.isolation.global.navigation.action =
-                        'notsamedomain';
-                      break;
+              // describe('navigating with preference "notsamedomain"', () => {
+              //   beforeEach(() => {
+              //     switch (navigatingIn) {
+              //       case 'sametab.global':
+              //       case 'newtab.global':
+              //         bg.tmp.storage.local.preferences.isolation.global.navigation.action =
+              //           'notsamedomain';
+              //         break;
+              //
+              //       case 'sametab.perdomain':
+              //       case 'newtab.perdomain':
+              //         bg.tmp.storage.local.preferences.isolation.domain = [
+              //           {
+              //             ...defaultIsolationDomainPreferences,
+              //             targetPattern: 'example.com',
+              //             navigation: {
+              //               action: 'notsamedomain',
+              //             },
+              //           },
+              //         ];
+              //         break;
+              //     }
+              //   });
+              //
+              //   describe('if its the exact same domain', () => {
+              //     beforeEach(async () => {
+              //       await navigateTo('https://example.com/moo');
+              //     });
+              //
+              //     it('should not open a new Temporary Container', async () => {
+              //       bg.browser.tabs.create.should.not.have.been.called;
+              //     });
+              //   });
+              //
+              //   describe('if its the same domain', () => {
+              //     beforeEach(async () => {
+              //       await navigateTo('https://sub.example.com');
+              //     });
+              //
+              //     it('should not open a new Temporary Container', async () => {
+              //       bg.browser.tabs.create.should.not.have.been.called;
+              //     });
+              //   });
+              //
+              //   describe('if its not the same domain', () => {
+              //     beforeEach(async () => {
+              //       await navigateTo('https://notexample.com');
+              //     });
+              //
+              //     it('should open a new Temporary Container', async () => {
+              //       bg.browser.tabs.create.should.have.been.calledOnce;
+              //     });
+              //   });
+              //
+              //   describe('if its not the same domain after a redirect', () => {
+              //     beforeEach(async () => {
+              //       bg.browser.tabs._registerRedirects(
+              //         'https://out.example.com',
+              //         ['https://notexample.com']
+              //       );
+              //       await navigateTo('https://out.example.com');
+              //     });
+              //
+              //     it('should open a new Temporary Container', async () => {
+              //       bg.browser.tabs.create.should.have.been.calledOnce;
+              //     });
+              //   });
+              // });
 
-                    case 'sametab.perdomain':
-                    case 'newtab.perdomain':
-                      bg.tmp.storage.local.preferences.isolation.domain = [
-                        {
-                          ...defaultIsolationDomainPreferences,
-                          targetPattern: 'example.com',
-                          navigation: {
-                            action: 'notsamedomain',
-                          },
-                        },
-                      ];
-                      break;
-                  }
-                });
-
-                describe('if its the exact same domain', () => {
-                  beforeEach(async () => {
-                    await navigateTo('https://example.com/moo');
-                  });
-
-                  it('should not open a new Temporary Container', async () => {
-                    bg.browser.tabs.create.should.not.have.been.called;
-                  });
-                });
-
-                describe('if its the same domain', () => {
-                  beforeEach(async () => {
-                    await navigateTo('https://sub.example.com');
-                  });
-
-                  it('should not open a new Temporary Container', async () => {
-                    bg.browser.tabs.create.should.not.have.been.called;
-                  });
-                });
-
-                describe('if its not the same domain', () => {
-                  beforeEach(async () => {
-                    await navigateTo('https://notexample.com');
-                  });
-
-                  it('should open a new Temporary Container', async () => {
-                    bg.browser.tabs.create.should.have.been.calledOnce;
-                  });
-                });
-
-                describe('if its not the same domain after a redirect', () => {
-                  beforeEach(async () => {
-                    bg.browser.tabs._registerRedirects(
-                      'https://out.example.com',
-                      ['https://notexample.com']
-                    );
-                    await navigateTo('https://out.example.com');
-                  });
-
-                  it('should open a new Temporary Container', async () => {
-                    bg.browser.tabs.create.should.have.been.calledOnce;
-                  });
-                });
-              });
-
-              describe('navigating with preference "notsamedomainexact"', () => {
-                beforeEach(() => {
-                  switch (navigatingIn) {
-                    case 'sametab.global':
-                    case 'newtab.global':
-                      bg.tmp.storage.local.preferences.isolation.global.navigation.action =
-                        'notsamedomainexact';
-                      break;
-
-                    case 'sametab.perdomain':
-                    case 'newtab.perdomain':
-                      bg.tmp.storage.local.preferences.isolation.domain = [
-                        {
-                          ...defaultIsolationDomainPreferences,
-                          targetPattern: 'example.com',
-                          navigation: {
-                            action: 'notsamedomainexact',
-                          },
-                        },
-                      ];
-                      break;
-                  }
-                });
-
-                describe('if its the exact same domain', () => {
-                  beforeEach(async () => {
-                    await navigateTo('https://example.com/moo');
-                  });
-
-                  it('should not open a new Temporary Container', async () => {
-                    bg.browser.tabs.create.should.not.have.been.called;
-                  });
-                });
-
-                describe('if its the same domain', () => {
-                  beforeEach(async () => {
-                    await navigateTo('https://sub.example.com');
-                  });
-
-                  it('should open a new Temporary Container', async () => {
-                    bg.browser.tabs.create.should.have.been.calledOnce;
-                  });
-                });
-
-                describe('if its not the same domain', () => {
-                  beforeEach(async () => {
-                    await navigateTo('https://notexample.com');
-                  });
-
-                  it('should open a new Temporary Container', async () => {
-                    bg.browser.tabs.create.should.have.been.calledOnce;
-                  });
-                });
-
-                describe('follow-up redirects to the exact same domain after isolating', () => {
-                  beforeEach(async () => {
-                    bg.browser.tabs._registerRedirects(
-                      'http://notexample.com',
-                      ['https://notexample.com']
-                    );
-                    await navigateTo('http://notexample.com');
-                  });
-
-                  it('should not open two Temporary Containers', async () => {
-                    bg.browser.tabs.create.should.have.been.calledOnce;
-                  });
-                });
-              });
+              // describe('navigating with preference "notsamedomainexact"', () => {
+              //   beforeEach(() => {
+              //     switch (navigatingIn) {
+              //       case 'sametab.global':
+              //       case 'newtab.global':
+              //         bg.tmp.storage.local.preferences.isolation.global.navigation.action =
+              //           'notsamedomainexact';
+              //         break;
+              //
+              //       case 'sametab.perdomain':
+              //       case 'newtab.perdomain':
+              //         bg.tmp.storage.local.preferences.isolation.domain = [
+              //           {
+              //             ...defaultIsolationDomainPreferences,
+              //             targetPattern: 'example.com',
+              //             navigation: {
+              //               action: 'notsamedomainexact',
+              //             },
+              //           },
+              //         ];
+              //         break;
+              //     }
+              //   });
+              //
+              //   describe('if its the exact same domain', () => {
+              //     beforeEach(async () => {
+              //       await navigateTo('https://example.com/moo');
+              //     });
+              //
+              //     it('should not open a new Temporary Container', async () => {
+              //       bg.browser.tabs.create.should.not.have.been.called;
+              //     });
+              //   });
+              //
+              //   describe('if its the same domain', () => {
+              //     beforeEach(async () => {
+              //       await navigateTo('https://sub.example.com');
+              //     });
+              //
+              //     it('should open a new Temporary Container', async () => {
+              //       bg.browser.tabs.create.should.have.been.calledOnce;
+              //     });
+              //   });
+              //
+              //   describe('if its not the same domain', () => {
+              //     beforeEach(async () => {
+              //       await navigateTo('https://notexample.com');
+              //     });
+              //
+              //     it('should open a new Temporary Container', async () => {
+              //       bg.browser.tabs.create.should.have.been.calledOnce;
+              //     });
+              //   });
+              //
+              //   describe('follow-up redirects to the exact same domain after isolating', () => {
+              //     beforeEach(async () => {
+              //       bg.browser.tabs._registerRedirects(
+              //         'http://notexample.com',
+              //         ['https://notexample.com']
+              //       );
+              //       await navigateTo('http://notexample.com');
+              //     });
+              //
+              //     it('should not open two Temporary Containers', async () => {
+              //       bg.browser.tabs.create.should.have.been.calledOnce;
+              //     });
+              //   });
+              // });
 
               describe('toggle isolation off', () => {
                 beforeEach(async () => {
@@ -371,35 +371,35 @@ preferencesTestSet.map((preferences) => {
                   );
                 });
 
-                describe('if its the exact same domain', () => {
-                  beforeEach(async () => {
-                    await navigateTo('https://example.com/moo');
-                  });
-
-                  it('should not open a new Temporary Container', async () => {
-                    bg.browser.tabs.create.should.not.have.been.called;
-                  });
-                });
-
-                describe('if its the same domain', () => {
-                  beforeEach(async () => {
-                    await navigateTo('https://sub.example.com');
-                  });
-
-                  it('should not open a new Temporary Container', async () => {
-                    bg.browser.tabs.create.should.not.have.been.called;
-                  });
-                });
-
-                describe('if its not the same domain', () => {
-                  beforeEach(async () => {
-                    await navigateTo('https://notexample.com');
-                  });
-
-                  it('should not open a new Temporary Container', async () => {
-                    bg.browser.tabs.create.should.not.have.been.called;
-                  });
-                });
+                // describe('if its the exact same domain', () => {
+                //   beforeEach(async () => {
+                //     await navigateTo('https://example.com/moo');
+                //   });
+                //
+                //   it('should not open a new Temporary Container', async () => {
+                //     bg.browser.tabs.create.should.not.have.been.called;
+                //   });
+                // });
+                //
+                // describe('if its the same domain', () => {
+                //   beforeEach(async () => {
+                //     await navigateTo('https://sub.example.com');
+                //   });
+                //
+                //   it('should not open a new Temporary Container', async () => {
+                //     bg.browser.tabs.create.should.not.have.been.called;
+                //   });
+                // });
+                //
+                // describe('if its not the same domain', () => {
+                //   beforeEach(async () => {
+                //     await navigateTo('https://notexample.com');
+                //   });
+                //
+                //   it('should not open a new Temporary Container', async () => {
+                //     bg.browser.tabs.create.should.not.have.been.called;
+                //   });
+                // });
               });
 
               describe('when auto-enable isolation is turned on with action = always', () => {

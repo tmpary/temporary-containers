@@ -52,8 +52,8 @@ export interface TmpTabOptions {
 
 export type IsolationAction =
   | 'never'
-  | 'notsamedomain'
-  | 'notsamedomainexact'
+  | 'notsamedomain' // legacy
+  | 'notsamedomainexact' // legacy
   | 'always'
   | 'global';
 

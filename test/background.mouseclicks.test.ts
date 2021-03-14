@@ -39,116 +39,116 @@ preferencesTestSet.map((preferences) => {
           .exist;
       });
 
-      it('global middle mouse same domain (ignore)', async () => {
-        const { tmp: background, helper } = await loadBackground({
-          preferences,
-        });
-
-        const fakeSender = {
-          tab: helper.fakeTab({
-            id: 1,
-            url: 'https://notexample.com',
-          }),
-        };
-        const fakeMessage = {
-          method: 'linkClicked',
-          payload: {
-            href: 'https://example.com',
-            event: {
-              button: 1,
-            },
-          },
-        };
-
-        background.storage.local.preferences.isolation.global.mouseClick.middle.action =
-          'notsamedomain';
-        await background.runtime.onMessage(fakeMessage, fakeSender);
-        expect(background.mouseclick.isolated[fakeMessage.payload.href]).not.to
-          .be.undefined;
-      });
-
-      it('global middle mouse same domain (handle)', async () => {
-        const { tmp: background, helper } = await loadBackground({
-          preferences,
-        });
-
-        const fakeSender = {
-          tab: helper.fakeTab({
-            id: 1,
-            url: 'https://example.com',
-          }),
-        };
-        const fakeMessage = {
-          method: 'linkClicked',
-          payload: {
-            href: 'https://not.example.com',
-            event: {
-              button: 1,
-            },
-          },
-        };
-        background.storage.local.preferences.isolation.global.mouseClick.middle.action =
-          'notsamedomain';
-        await background.runtime.onMessage(fakeMessage, fakeSender);
-        expect(background.mouseclick.isolated[fakeMessage.payload.href]).to.be
-          .undefined;
-      });
-
-      it('global middle mouse exact same domain (fail)', async () => {
-        const { tmp: background, helper } = await loadBackground({
-          preferences,
-        });
-
-        const fakeSender = {
-          tab: helper.fakeTab({
-            id: 1,
-            url: 'https://not.example.com',
-          }),
-        };
-        const fakeMessage = {
-          method: 'linkClicked',
-          payload: {
-            href: 'https://example.com',
-            event: {
-              button: 1,
-            },
-          },
-        };
-
-        background.storage.local.preferences.isolation.global.mouseClick.middle.action =
-          'notsamedomainexact';
-        await background.runtime.onMessage(fakeMessage, fakeSender);
-        expect(background.mouseclick.isolated[fakeMessage.payload.href]).not.to
-          .be.undefined;
-      });
-
-      it('global middle mouse exact same domain (handle)', async () => {
-        const { tmp: background, helper } = await loadBackground({
-          preferences,
-        });
-
-        const fakeSender = {
-          tab: helper.fakeTab({
-            id: 1,
-            url: 'https://example.com',
-          }),
-        };
-        const fakeMessage = {
-          method: 'linkClicked',
-          payload: {
-            href: 'https://example.com/whatever',
-            event: {
-              button: 1,
-            },
-          },
-        };
-
-        background.storage.local.preferences.isolation.global.mouseClick.middle.action =
-          'notsamedomainexact';
-        await background.runtime.onMessage(fakeMessage, fakeSender);
-        expect(background.mouseclick.isolated[fakeMessage.payload.href]).to.be
-          .undefined;
-      });
+      // it('global middle mouse same domain (ignore)', async () => {
+      //   const { tmp: background, helper } = await loadBackground({
+      //     preferences,
+      //   });
+      //
+      //   const fakeSender = {
+      //     tab: helper.fakeTab({
+      //       id: 1,
+      //       url: 'https://notexample.com',
+      //     }),
+      //   };
+      //   const fakeMessage = {
+      //     method: 'linkClicked',
+      //     payload: {
+      //       href: 'https://example.com',
+      //       event: {
+      //         button: 1,
+      //       },
+      //     },
+      //   };
+      //
+      //   background.storage.local.preferences.isolation.global.mouseClick.middle.action =
+      //     'notsamedomain';
+      //   await background.runtime.onMessage(fakeMessage, fakeSender);
+      //   expect(background.mouseclick.isolated[fakeMessage.payload.href]).not.to
+      //     .be.undefined;
+      // });
+      //
+      // it('global middle mouse same domain (handle)', async () => {
+      //   const { tmp: background, helper } = await loadBackground({
+      //     preferences,
+      //   });
+      //
+      //   const fakeSender = {
+      //     tab: helper.fakeTab({
+      //       id: 1,
+      //       url: 'https://example.com',
+      //     }),
+      //   };
+      //   const fakeMessage = {
+      //     method: 'linkClicked',
+      //     payload: {
+      //       href: 'https://not.example.com',
+      //       event: {
+      //         button: 1,
+      //       },
+      //     },
+      //   };
+      //   background.storage.local.preferences.isolation.global.mouseClick.middle.action =
+      //     'notsamedomain';
+      //   await background.runtime.onMessage(fakeMessage, fakeSender);
+      //   expect(background.mouseclick.isolated[fakeMessage.payload.href]).to.be
+      //     .undefined;
+      // });
+      //
+      // it('global middle mouse exact same domain (fail)', async () => {
+      //   const { tmp: background, helper } = await loadBackground({
+      //     preferences,
+      //   });
+      //
+      //   const fakeSender = {
+      //     tab: helper.fakeTab({
+      //       id: 1,
+      //       url: 'https://not.example.com',
+      //     }),
+      //   };
+      //   const fakeMessage = {
+      //     method: 'linkClicked',
+      //     payload: {
+      //       href: 'https://example.com',
+      //       event: {
+      //         button: 1,
+      //       },
+      //     },
+      //   };
+      //
+      //   background.storage.local.preferences.isolation.global.mouseClick.middle.action =
+      //     'notsamedomainexact';
+      //   await background.runtime.onMessage(fakeMessage, fakeSender);
+      //   expect(background.mouseclick.isolated[fakeMessage.payload.href]).not.to
+      //     .be.undefined;
+      // });
+      //
+      // it('global middle mouse exact same domain (handle)', async () => {
+      //   const { tmp: background, helper } = await loadBackground({
+      //     preferences,
+      //   });
+      //
+      //   const fakeSender = {
+      //     tab: helper.fakeTab({
+      //       id: 1,
+      //       url: 'https://example.com',
+      //     }),
+      //   };
+      //   const fakeMessage = {
+      //     method: 'linkClicked',
+      //     payload: {
+      //       href: 'https://example.com/whatever',
+      //       event: {
+      //         button: 1,
+      //       },
+      //     },
+      //   };
+      //
+      //   background.storage.local.preferences.isolation.global.mouseClick.middle.action =
+      //     'notsamedomainexact';
+      //   await background.runtime.onMessage(fakeMessage, fakeSender);
+      //   expect(background.mouseclick.isolated[fakeMessage.payload.href]).to.be
+      //     .undefined;
+      // });
 
       it('global ctrl+left mouse allowed', async () => {
         const { tmp: background, helper } = await loadBackground({
@@ -208,121 +208,121 @@ preferencesTestSet.map((preferences) => {
           .be.undefined;
       });
 
-      it('global ctrl+left mouse same domain (ignore)', async () => {
-        const { tmp: background, helper } = await loadBackground({
-          preferences,
-        });
-
-        const fakeSender = {
-          tab: helper.fakeTab({
-            id: 1,
-            url: 'https://notexample.com',
-          }),
-        };
-        const fakeMessage = {
-          method: 'linkClicked',
-          payload: {
-            href: 'https://example.com',
-            event: {
-              button: 0,
-              ctrlKey: true,
-            },
-          },
-        };
-
-        background.storage.local.preferences.isolation.global.mouseClick.ctrlleft.action =
-          'notsamedomain';
-        await background.runtime.onMessage(fakeMessage, fakeSender);
-        expect(background.mouseclick.isolated[fakeMessage.payload.href]).not.to
-          .be.undefined;
-      });
-
-      it('global ctrl+left mouse same domain (handle)', async () => {
-        const { tmp: background, helper } = await loadBackground({
-          preferences,
-        });
-
-        const fakeSender = {
-          tab: helper.fakeTab({
-            id: 1,
-            url: 'https://not.example.com',
-          }),
-        };
-        const fakeMessage = {
-          method: 'linkClicked',
-          payload: {
-            href: 'https://example.com',
-            event: {
-              button: 0,
-              ctrlKey: true,
-            },
-          },
-        };
-
-        background.storage.local.preferences.isolation.global.mouseClick.ctrlleft.action =
-          'notsamedomain';
-        await background.runtime.onMessage(fakeMessage, fakeSender);
-        expect(background.mouseclick.isolated[fakeMessage.payload.href]).to.be
-          .undefined;
-      });
-
-      it('global ctrl+left mouse exact same domain (fail)', async () => {
-        const { tmp: background, helper } = await loadBackground({
-          preferences,
-        });
-
-        const fakeSender = {
-          tab: helper.fakeTab({
-            id: 1,
-            url: 'https://not.example.com',
-          }),
-        };
-        const fakeMessage = {
-          method: 'linkClicked',
-          payload: {
-            href: 'https://example.com',
-            event: {
-              button: 0,
-              ctrlKey: true,
-            },
-          },
-        };
-
-        background.storage.local.preferences.isolation.global.mouseClick.ctrlleft.action =
-          'notsamedomainexact';
-        await background.runtime.onMessage(fakeMessage, fakeSender);
-        expect(background.mouseclick.isolated[fakeMessage.payload.href]).not.to
-          .be.undefined;
-      });
-
-      it('global ctrl+left mouse exact same domain (handle)', async () => {
-        const { tmp: background, helper } = await loadBackground({
-          preferences,
-        });
-
-        const fakeSender = {
-          tab: helper.fakeTab({
-            id: 1,
-            url: 'https://example.com',
-          }),
-        };
-        const fakeMessage = {
-          method: 'linkClicked',
-          payload: {
-            href: 'https://example.com/whatever',
-            event: {
-              button: 0,
-              ctrlKey: true,
-            },
-          },
-        };
-
-        background.storage.local.preferences.isolation.global.mouseClick.ctrlleft.action =
-          'notsamedomainexact';
-        await background.runtime.onMessage(fakeMessage, fakeSender);
-        expect(background.mouseclick.isolated[fakeMessage.payload.href]).to.be
-          .undefined;
-      });
+      //   it('global ctrl+left mouse same domain (ignore)', async () => {
+      //     const { tmp: background, helper } = await loadBackground({
+      //       preferences,
+      //     });
+      //
+      //     const fakeSender = {
+      //       tab: helper.fakeTab({
+      //         id: 1,
+      //         url: 'https://notexample.com',
+      //       }),
+      //     };
+      //     const fakeMessage = {
+      //       method: 'linkClicked',
+      //       payload: {
+      //         href: 'https://example.com',
+      //         event: {
+      //           button: 0,
+      //           ctrlKey: true,
+      //         },
+      //       },
+      //     };
+      //
+      //     background.storage.local.preferences.isolation.global.mouseClick.ctrlleft.action =
+      //       'notsamedomain';
+      //     await background.runtime.onMessage(fakeMessage, fakeSender);
+      //     expect(background.mouseclick.isolated[fakeMessage.payload.href]).not.to
+      //       .be.undefined;
+      //   });
+      //
+      //   it('global ctrl+left mouse same domain (handle)', async () => {
+      //     const { tmp: background, helper } = await loadBackground({
+      //       preferences,
+      //     });
+      //
+      //     const fakeSender = {
+      //       tab: helper.fakeTab({
+      //         id: 1,
+      //         url: 'https://not.example.com',
+      //       }),
+      //     };
+      //     const fakeMessage = {
+      //       method: 'linkClicked',
+      //       payload: {
+      //         href: 'https://example.com',
+      //         event: {
+      //           button: 0,
+      //           ctrlKey: true,
+      //         },
+      //       },
+      //     };
+      //
+      //     background.storage.local.preferences.isolation.global.mouseClick.ctrlleft.action =
+      //       'notsamedomain';
+      //     await background.runtime.onMessage(fakeMessage, fakeSender);
+      //     expect(background.mouseclick.isolated[fakeMessage.payload.href]).to.be
+      //       .undefined;
+      //   });
+      //
+      //   it('global ctrl+left mouse exact same domain (fail)', async () => {
+      //     const { tmp: background, helper } = await loadBackground({
+      //       preferences,
+      //     });
+      //
+      //     const fakeSender = {
+      //       tab: helper.fakeTab({
+      //         id: 1,
+      //         url: 'https://not.example.com',
+      //       }),
+      //     };
+      //     const fakeMessage = {
+      //       method: 'linkClicked',
+      //       payload: {
+      //         href: 'https://example.com',
+      //         event: {
+      //           button: 0,
+      //           ctrlKey: true,
+      //         },
+      //       },
+      //     };
+      //
+      //     background.storage.local.preferences.isolation.global.mouseClick.ctrlleft.action =
+      //       'notsamedomainexact';
+      //     await background.runtime.onMessage(fakeMessage, fakeSender);
+      //     expect(background.mouseclick.isolated[fakeMessage.payload.href]).not.to
+      //       .be.undefined;
+      //   });
+      //
+      //   it('global ctrl+left mouse exact same domain (handle)', async () => {
+      //     const { tmp: background, helper } = await loadBackground({
+      //       preferences,
+      //     });
+      //
+      //     const fakeSender = {
+      //       tab: helper.fakeTab({
+      //         id: 1,
+      //         url: 'https://example.com',
+      //       }),
+      //     };
+      //     const fakeMessage = {
+      //       method: 'linkClicked',
+      //       payload: {
+      //         href: 'https://example.com/whatever',
+      //         event: {
+      //           button: 0,
+      //           ctrlKey: true,
+      //         },
+      //       },
+      //     };
+      //
+      //     background.storage.local.preferences.isolation.global.mouseClick.ctrlleft.action =
+      //       'notsamedomainexact';
+      //     await background.runtime.onMessage(fakeMessage, fakeSender);
+      //     expect(background.mouseclick.isolated[fakeMessage.payload.href]).to.be
+      //       .undefined;
+      //   });
     });
 
     describe('preferences for mouse clicks per domain', () => {
@@ -370,181 +370,181 @@ preferencesTestSet.map((preferences) => {
           .undefined;
       });
 
-      it('middle mouse per domain: notsamedomainexact (handle)', async () => {
-        const { tmp: background, helper } = await loadBackground({
-          preferences,
-        });
-
-        const fakeSender = {
-          tab: helper.fakeTab({
-            id: 1,
-            url: 'https://example.com',
-          }),
-        };
-        const fakeMessage = {
-          method: 'linkClicked',
-          payload: {
-            href: 'https://not.example.com',
-            event: {
-              button: 1,
-            },
-          },
-        };
-
-        background.storage.local.preferences.isolation.domain = [
-          {
-            ...background.preferences.defaults.isolation.global,
-            targetPattern: 'example.com',
-            mouseClick: {
-              ...background.preferences.defaults.isolation.global.mouseClick,
-              middle: {
-                action: 'notsamedomainexact',
-                container: 'default',
-              },
-            },
-            always: {
-              action: 'disabled',
-              allowedInPermanent: true,
-              allowedInTemporary: true,
-            },
-          },
-        ];
-        await background.runtime.onMessage(fakeMessage, fakeSender);
-        expect(background.mouseclick.isolated[fakeMessage.payload.href]).not.to
-          .be.undefined;
-      });
-
-      it('middle mouse per domain: notsamedomainexact (ignore)', async () => {
-        const { tmp: background, helper } = await loadBackground({
-          preferences,
-        });
-
-        const fakeSender = {
-          tab: helper.fakeTab({
-            id: 1,
-            url: 'https://example.com',
-          }),
-        };
-        const fakeMessage = {
-          method: 'linkClicked',
-          payload: {
-            href: 'https://example.com/whatever',
-            event: {
-              button: 1,
-            },
-          },
-        };
-
-        background.storage.local.preferences.isolation.domain = [
-          {
-            ...background.preferences.defaults.isolation.global,
-            targetPattern: 'example.com',
-            mouseClick: {
-              ...background.preferences.defaults.isolation.global.mouseClick,
-              middle: {
-                action: 'notsamedomainexact',
-                container: 'default',
-              },
-            },
-            always: {
-              action: 'disabled',
-              allowedInPermanent: true,
-              allowedInTemporary: true,
-            },
-          },
-        ];
-        await background.runtime.onMessage(fakeMessage, fakeSender);
-        expect(background.mouseclick.isolated[fakeMessage.payload.href]).to.be
-          .undefined;
-      });
-
-      it('middle mouse per domain: notsamedomain (handle)', async () => {
-        const { tmp: background, helper } = await loadBackground({
-          preferences,
-        });
-
-        const fakeSender = {
-          tab: helper.fakeTab({
-            id: 1,
-            url: 'https://example.com',
-          }),
-        };
-        const fakeMessage = {
-          method: 'linkClicked',
-          payload: {
-            href: 'https://not.example.com',
-            event: {
-              button: 1,
-            },
-          },
-        };
-
-        background.storage.local.preferences.isolation.domain = [
-          {
-            ...background.preferences.defaults.isolation.global,
-            targetPattern: 'example.com',
-            mouseClick: {
-              ...background.preferences.defaults.isolation.global.mouseClick,
-              middle: {
-                action: 'notsamedomain',
-                container: 'default',
-              },
-            },
-            always: {
-              action: 'disabled',
-              allowedInPermanent: true,
-              allowedInTemporary: true,
-            },
-          },
-        ];
-        await background.runtime.onMessage(fakeMessage, fakeSender);
-        expect(background.mouseclick.isolated[fakeMessage.payload.href]).to.be
-          .undefined;
-      });
-
-      it('middle mouse per domain: notsamedomain (handle)', async () => {
-        const { tmp: background, helper } = await loadBackground({
-          preferences,
-        });
-
-        const fakeSender = {
-          tab: helper.fakeTab({
-            id: 1,
-            url: 'https://example.com',
-          }),
-        };
-        const fakeMessage = {
-          method: 'linkClicked',
-          payload: {
-            href: 'https://notexample.com',
-            event: {
-              button: 1,
-            },
-          },
-        };
-
-        background.storage.local.preferences.isolation.domain = [
-          {
-            ...background.preferences.defaults.isolation.global,
-            targetPattern: 'example.com',
-            mouseClick: {
-              ...background.preferences.defaults.isolation.global.mouseClick,
-              middle: {
-                action: 'notsamedomain',
-                container: 'default',
-              },
-            },
-            always: {
-              action: 'disabled',
-              allowedInPermanent: true,
-              allowedInTemporary: true,
-            },
-          },
-        ];
-        await background.runtime.onMessage(fakeMessage, fakeSender);
-        expect(background.mouseclick.isolated[fakeMessage.payload.href]).not.to
-          .be.undefined;
-      });
+      // it('middle mouse per domain: notsamedomainexact (handle)', async () => {
+      //   const { tmp: background, helper } = await loadBackground({
+      //     preferences,
+      //   });
+      //
+      //   const fakeSender = {
+      //     tab: helper.fakeTab({
+      //       id: 1,
+      //       url: 'https://example.com',
+      //     }),
+      //   };
+      //   const fakeMessage = {
+      //     method: 'linkClicked',
+      //     payload: {
+      //       href: 'https://not.example.com',
+      //       event: {
+      //         button: 1,
+      //       },
+      //     },
+      //   };
+      //
+      //   background.storage.local.preferences.isolation.domain = [
+      //     {
+      //       ...background.preferences.defaults.isolation.global,
+      //       targetPattern: 'example.com',
+      //       mouseClick: {
+      //         ...background.preferences.defaults.isolation.global.mouseClick,
+      //         middle: {
+      //           action: 'notsamedomainexact',
+      //           container: 'default',
+      //         },
+      //       },
+      //       always: {
+      //         action: 'disabled',
+      //         allowedInPermanent: true,
+      //         allowedInTemporary: true,
+      //       },
+      //     },
+      //   ];
+      //   await background.runtime.onMessage(fakeMessage, fakeSender);
+      //   expect(background.mouseclick.isolated[fakeMessage.payload.href]).not.to
+      //     .be.undefined;
+      // });
+      //
+      // it('middle mouse per domain: notsamedomainexact (ignore)', async () => {
+      //   const { tmp: background, helper } = await loadBackground({
+      //     preferences,
+      //   });
+      //
+      //   const fakeSender = {
+      //     tab: helper.fakeTab({
+      //       id: 1,
+      //       url: 'https://example.com',
+      //     }),
+      //   };
+      //   const fakeMessage = {
+      //     method: 'linkClicked',
+      //     payload: {
+      //       href: 'https://example.com/whatever',
+      //       event: {
+      //         button: 1,
+      //       },
+      //     },
+      //   };
+      //
+      //   background.storage.local.preferences.isolation.domain = [
+      //     {
+      //       ...background.preferences.defaults.isolation.global,
+      //       targetPattern: 'example.com',
+      //       mouseClick: {
+      //         ...background.preferences.defaults.isolation.global.mouseClick,
+      //         middle: {
+      //           action: 'notsamedomainexact',
+      //           container: 'default',
+      //         },
+      //       },
+      //       always: {
+      //         action: 'disabled',
+      //         allowedInPermanent: true,
+      //         allowedInTemporary: true,
+      //       },
+      //     },
+      //   ];
+      //   await background.runtime.onMessage(fakeMessage, fakeSender);
+      //   expect(background.mouseclick.isolated[fakeMessage.payload.href]).to.be
+      //     .undefined;
+      // });
+      //
+      // it('middle mouse per domain: notsamedomain (handle)', async () => {
+      //   const { tmp: background, helper } = await loadBackground({
+      //     preferences,
+      //   });
+      //
+      //   const fakeSender = {
+      //     tab: helper.fakeTab({
+      //       id: 1,
+      //       url: 'https://example.com',
+      //     }),
+      //   };
+      //   const fakeMessage = {
+      //     method: 'linkClicked',
+      //     payload: {
+      //       href: 'https://not.example.com',
+      //       event: {
+      //         button: 1,
+      //       },
+      //     },
+      //   };
+      //
+      //   background.storage.local.preferences.isolation.domain = [
+      //     {
+      //       ...background.preferences.defaults.isolation.global,
+      //       targetPattern: 'example.com',
+      //       mouseClick: {
+      //         ...background.preferences.defaults.isolation.global.mouseClick,
+      //         middle: {
+      //           action: 'notsamedomain',
+      //           container: 'default',
+      //         },
+      //       },
+      //       always: {
+      //         action: 'disabled',
+      //         allowedInPermanent: true,
+      //         allowedInTemporary: true,
+      //       },
+      //     },
+      //   ];
+      //   await background.runtime.onMessage(fakeMessage, fakeSender);
+      //   expect(background.mouseclick.isolated[fakeMessage.payload.href]).to.be
+      //     .undefined;
+      // });
+      //
+      // it('middle mouse per domain: notsamedomain (handle)', async () => {
+      //   const { tmp: background, helper } = await loadBackground({
+      //     preferences,
+      //   });
+      //
+      //   const fakeSender = {
+      //     tab: helper.fakeTab({
+      //       id: 1,
+      //       url: 'https://example.com',
+      //     }),
+      //   };
+      //   const fakeMessage = {
+      //     method: 'linkClicked',
+      //     payload: {
+      //       href: 'https://notexample.com',
+      //       event: {
+      //         button: 1,
+      //       },
+      //     },
+      //   };
+      //
+      //   background.storage.local.preferences.isolation.domain = [
+      //     {
+      //       ...background.preferences.defaults.isolation.global,
+      //       targetPattern: 'example.com',
+      //       mouseClick: {
+      //         ...background.preferences.defaults.isolation.global.mouseClick,
+      //         middle: {
+      //           action: 'notsamedomain',
+      //           container: 'default',
+      //         },
+      //       },
+      //       always: {
+      //         action: 'disabled',
+      //         allowedInPermanent: true,
+      //         allowedInTemporary: true,
+      //       },
+      //     },
+      //   ];
+      //   await background.runtime.onMessage(fakeMessage, fakeSender);
+      //   expect(background.mouseclick.isolated[fakeMessage.payload.href]).not.to
+      //     .be.undefined;
+      // });
 
       it('per domain should only handle the relevant domain (exact)', async () => {
         const { tmp: background, helper } = await loadBackground({

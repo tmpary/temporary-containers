@@ -53,12 +53,12 @@ export default mixins(mixin).extend({
       <option value="never">
         {{ t('optionsIsolationSettingsNever') }}
       </option>
-      <option value="notsamedomain">
-        {{ t('optionsIsolationSettingsNotSameDomain') }}
-      </option>
-      <option value="notsamedomainexact">
-        {{ t('optionsIsolationSettingsNotSameDomainExact') }}
-      </option>
+      <!--      <option value="notsamedomain">-->
+      <!--        {{ t('optionsIsolationSettingsNotSameDomain') }}-->
+      <!--      </option>-->
+      <!--      <option value="notsamedomainexact">-->
+      <!--        {{ t('optionsIsolationSettingsNotSameDomainExact') }}-->
+      <!--      </option>-->
       <option value="always">
         {{ t('optionsIsolationSettingsAlways') }}
       </option>

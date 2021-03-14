@@ -634,20 +634,20 @@ export class Isolation {
         return true;
 
       case 'notsamedomainexact':
-        if (target !== origin) {
-          this.debug(
-            '[checkIsolationPreferenceAgainstUrl] isolating based on "notsamedomainexact"'
-          );
-          return true;
-        }
+      // if (target !== origin) {
+      //   this.debug(
+      //     '[checkIsolationPreferenceAgainstUrl] isolating based on "notsamedomainexact"'
+      //   );
+      //   return true;
+      // }
 
       case 'notsamedomain':
-        if (!this.utils.sameDomain(origin, target)) {
-          this.debug(
-            '[checkIsolationPreferenceAgainstUrl] isolating based on "notsamedomain"'
-          );
-          return true;
-        }
+      // if (!this.utils.sameDomain(origin, target)) {
+      //   this.debug(
+      //     '[checkIsolationPreferenceAgainstUrl] isolating based on "notsamedomain"'
+      //   );
+      //   return true;
+      // }
     }
     return false;
   }

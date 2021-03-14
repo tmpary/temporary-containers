@@ -9,11 +9,11 @@ import { PageAction } from './pageaction';
 import { Storage } from './storage';
 import { Utils } from './utils';
 import {
-  PreferencesSchema,
-  IsolationAction,
-  Tab,
-  MacAssignment,
   Debug,
+  IsolationAction,
+  MacAssignment,
+  PreferencesSchema,
+  Tab,
   WebRequestOnBeforeRequestDetails,
 } from '~/types';
 
@@ -493,8 +493,26 @@ export class Isolation {
     }
 
     for (const patternPreferences of this.pref.isolation.domain) {
-      const domainPattern = patternPreferences.targetPattern;
-      if (!this.utils.matchDomainPattern(request.url, domainPattern)) {
+      const targetDomainPattern = patternPreferences.targetPattern;
+      const originDomainPattern = patternPreferences.originPattern;
+
+      const originUrl =
+        (tab.url === 'about:blank' &&
+          openerTab &&
+          openerTab.url.startsWith('http') &&
+          openerTab.url) ||
+        tab.url;
+
+      const originUrlMatches = this.utils.matchDomainPattern(
+        originUrl,
+        originDomainPattern
+      );
+      const targetUrlMatches = this.utils.matchDomainPattern(
+        request.url,
+        targetDomainPattern
+      );
+
+      if (!targetUrlMatches || !originUrlMatches) {
         continue;
       }
       if (!patternPreferences.always) {
@@ -504,7 +522,7 @@ export class Isolation {
       const preferences = patternPreferences.always;
       this.debug(
         '[shouldIsolateAlways] found pattern for incoming request url',
-        domainPattern,
+        targetDomainPattern,
         preferences
       );
       if (preferences.action === 'disabled') {
@@ -539,18 +557,18 @@ export class Isolation {
         return false;
       }
 
-      if (!this.utils.matchDomainPattern(tab.url, domainPattern)) {
+      if (!this.utils.matchDomainPattern(tab.url, targetDomainPattern)) {
         let openerMatches = false;
         if (
           openerTab &&
           openerTab.url.startsWith('http') &&
-          this.utils.matchDomainPattern(openerTab.url, domainPattern)
+          this.utils.matchDomainPattern(openerTab.url, targetDomainPattern)
         ) {
           openerMatches = true;
           this.debug(
             '[shouldIsolateAlways] opener tab url matched the pattern',
             openerTab.url,
-            domainPattern
+            targetDomainPattern
           );
         }
         if (!openerMatches) {
@@ -558,7 +576,7 @@ export class Isolation {
             '[shouldIsolateAlways] isolating because the tab/opener url doesnt match the pattern',
             tab.url,
             openerTab,
-            domainPattern
+            targetDomainPattern
           );
           return true;
         }

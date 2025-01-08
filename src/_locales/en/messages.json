@@ -155,8 +155,11 @@
   "optionsGeneralToolbarIconColorWhiteSimple": {
     "message": "white (simple)"
   },
-  "optionsDomainPattern": {
-    "message": "Domain Pattern"
+  "optionsTargetPattern": {
+    "message": "Target Domain Pattern"
+  },
+  "optionsOptionalOriginPattern": {
+    "message": "Origin Domain Pattern (Optional)"
   },
   "optionsExclusionPattern": {
     "message": "Exclusion Pattern"

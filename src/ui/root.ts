@@ -105,7 +105,7 @@ export default (
             console.error('error while saving preferences', error);
             this.$root.$emit(
               'showError',
-              `Error while saving preferences: ${error.toString()}`
+              `Error while saving preferences: ${error?.toString()}`
             );
             window.setTimeout(() => {
               this.$root.$emit('initialize');
@@ -134,7 +134,6 @@ export default (
     methods: {
       async initialize(options: InitializeOptions = {}): Promise<void> {
         let pongError = false;
-        let pongErrorMessage = false;
         let initializeLoader = false;
 
         if (window.location.search.startsWith('?error')) {
@@ -156,13 +155,12 @@ export default (
           }
         } catch (error) {
           pongError = true;
-          pongErrorMessage = error;
         }
         if (pongError) {
           if (initializeLoader) {
             this.$root.$emit('hideInitializeLoader');
           }
-          this.$root.$emit('showInitializeError', pongErrorMessage);
+          this.$root.$emit('showInitializeError');
           return;
         }
 
@@ -184,7 +182,7 @@ export default (
         } catch (error) {
           this.$root.$emit(
             'showError',
-            `Loading preferences failed, please try again. ${error.toString()}`
+            `Loading preferences failed, please try again. ${error?.toString()}`
           );
           return;
         }

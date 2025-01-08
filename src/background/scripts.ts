@@ -44,7 +44,7 @@ export class Scripts {
         } catch (error) {
           this.debug(
             '[maybeExecute] executing script failed',
-            error.toString()
+            error?.toString()
           );
         }
       }

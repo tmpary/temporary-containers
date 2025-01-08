@@ -24,9 +24,7 @@ export interface ContainerOptions {
   number: number;
   clean: boolean;
   deletesHistory?: boolean;
-  history?: {
-    [key: string]: { tabId: TabId };
-  };
+  history?: Record<string, { tabId: TabId }>;
 }
 
 export interface CreateTabOptions {
@@ -52,8 +50,8 @@ export interface TmpTabOptions {
 
 export type IsolationAction =
   | 'never'
-  | 'notsamedomain'
-  | 'notsamedomainexact'
+  | 'notsamedomain' // legacy
+  | 'notsamedomainexact' // legacy
   | 'always'
   | 'global';
 
@@ -75,16 +73,13 @@ export interface IsolationGlobal {
       container: 'default' | 'deleteshistory';
     };
   };
-  excluded: {
-    [key: string]: Record<string, unknown>;
-  };
-  excludedContainers: {
-    [key: string]: Record<string, unknown>;
-  };
+  excluded: Record<string, Record<string, unknown>>;
+  excludedContainers: Record<string, Record<string, unknown>>;
 }
 
 export interface IsolationDomain extends IsolationGlobal {
-  pattern: string;
+  targetPattern: string;
+  originPattern?: string;
   always: {
     action: 'enabled' | 'disabled';
     allowedInPermanent: boolean;
@@ -121,9 +116,7 @@ export type ToolbarIconColor =
 export interface StorageLocal {
   containerPrefix: string | false;
   tempContainerCounter: number;
-  tempContainers: {
-    [key: string]: ContainerOptions;
-  };
+  tempContainers: Record<string, ContainerOptions>;
   tempContainersNumbers: number[];
   statistics: {
     startTime: Date;
@@ -192,15 +185,11 @@ export interface PreferencesSchema {
   };
   ignoreRequests: IgnoredDomain[];
   cookies: {
-    domain: {
-      [key: string]: Cookie[];
-    };
+    domain: Record<string, Cookie[]>;
   };
   scripts: {
     active: boolean;
-    domain: {
-      [key: string]: Script[];
-    };
+    domain: Record<string, Script[]>
   };
   deletesHistory: {
     active: boolean;
@@ -279,3 +268,10 @@ export interface WebRequestOnBeforeRequestDetails
   extends browser.webRequest._OnBeforeRequestDetails {
   cookieStoreId: string;
 }
+
+export interface ToolTip {
+  hidden: boolean;
+  position?: 'bottom left' | 'top left';
+}
+
+export type DomainPatternType = 'target' | 'origin' | 'exclusion';

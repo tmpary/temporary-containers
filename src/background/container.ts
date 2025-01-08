@@ -22,9 +22,7 @@ export class Container {
   public noContainerTabs: {
     [key: number]: boolean;
   } = {};
-  public urlCreatedContainer: {
-    [key: string]: CookieStoreId;
-  } = {};
+  public urlCreatedContainer: Record<string, CookieStoreId> = {};
   public tabCreatedAsMacConfirmPage: {
     [key: number]: boolean;
   } = {};
@@ -34,9 +32,7 @@ export class Container {
 
   private containerColors: ContainerColor[] = CONTAINER_COLORS;
   private containerIcons: ContainerIcon[] = CONTAINER_ICONS;
-  private requestCreatedTab: {
-    [key: string]: boolean;
-  } = {};
+  private requestCreatedTab: Record<string, boolean> = {};
 
   private background: TemporaryContainers;
   private debug: Debug;
@@ -419,9 +415,7 @@ export class Container {
     // even out colors
     let availableColors = [];
     const containersOptions = Object.values(this.storage.local.tempContainers);
-    const assignedColors: {
-      [key: string]: number;
-    } = {};
+    const assignedColors: Record<string, number> = {};
     let maxColors = 0;
     for (const containerOptions of containersOptions) {
       if (typeof containerOptions !== 'object') {

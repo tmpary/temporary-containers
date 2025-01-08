@@ -17,29 +17,17 @@ import {
 import { Utils } from './utils';
 
 export class Request {
-  public lastSeenRequestUrl: {
-    [key: string]: string;
-  } = {};
+  public lastSeenRequestUrl: Record<string, string> = {};
 
   private canceledTabs: {
     [key: number]: {
-      requestIds: {
-        [key: string]: true;
-      };
-      urls: {
-        [key: string]: true;
-      };
+      requestIds: Record<string, true>;
+      urls: Record<string, true>;
     };
   } = {};
-  private canceledRequests: {
-    [key: string]: boolean;
-  } = {};
-  private requestIdUrlSeen: {
-    [key: string]: boolean;
-  } = {};
-  private cleanRequests: {
-    [key: string]: boolean;
-  } = {};
+  private canceledRequests: Record<string, boolean> = {};
+  private requestIdUrlSeen: Record<string, boolean> = {};
+  private cleanRequests: Record<string, boolean> = {};
 
   private background: TemporaryContainers;
   private debug: Debug;
@@ -92,7 +80,7 @@ export class Request {
     } catch (error) {
       this.debug(
         '[webRequestOnBeforeRequest] handling request failed',
-        error.toString()
+        error?.toString()
       );
     }
 

@@ -59,7 +59,7 @@ export class Storage {
     } catch (error) {
       this.debug(
         '[initialize] accessing managed storage failed:',
-        error.toString()
+        error?.toString()
       );
     }
 
@@ -81,7 +81,7 @@ export class Storage {
           previousVersion: this.local.version,
         });
       } catch (error) {
-        this.debug('[initialize] migration failed', error.toString());
+        this.debug('[initialize] migration failed', error?.toString());
       }
     }
 

@@ -1,6 +1,7 @@
 <script lang="ts">
 import mixins from 'vue-typed-mixins';
 import { mixin } from '~/ui/mixin';
+import { DomainPatternType, ToolTip } from '~/types';
 
 export default mixins(mixin).extend({
   props: {
@@ -10,10 +11,14 @@ export default mixins(mixin).extend({
     },
     tooltip: {
       type: Object,
-      default: (): { hidden: boolean; position: string } => ({
+      default: (): ToolTip => ({
         hidden: false,
         position: 'bottom left',
       }),
+    },
+    type: {
+      type: String as () => DomainPatternType,
+      default: 'origin',
     },
     domainPattern: {
       type: String,
@@ -23,13 +28,25 @@ export default mixins(mixin).extend({
       type: Boolean,
       default: false,
     },
-    exclusion: {
-      type: Boolean,
-      default: false,
-    },
     glossary: {
       type: Boolean,
       default: false,
+    },
+  },
+  methods: {
+    getLabelTranslation() {
+      switch (this.type) {
+        case 'target':
+          return this.t('optionsTargetPattern');
+        case 'origin':
+          return this.t('optionsOptionalOriginPattern');
+        case 'exclusion':
+          return this.t('optionsExclusionPattern');
+      }
+    },
+    getExamplePlaceholder() {
+      const placeholders = ['*.example.com', 'www.example.com', 'example.com'];
+      return placeholders[Math.floor(Math.random() * placeholders.length)];
     },
   },
   watch: {
@@ -39,7 +56,6 @@ export default mixins(mixin).extend({
   },
 });
 </script>
-
 <template>
   <div
     :id="`${id}Div`"
@@ -48,14 +64,14 @@ export default mixins(mixin).extend({
     :class="{ disabled: disabled }"
   >
     <label>
-      <span v-if="!exclusion">
-        <span v-if="!glossary">{{ t('optionsDomainPattern') }}</span>
-        <span v-else data-glossary="Domain Pattern" />
-      </span>
-      <span v-else>
-        {{ t('optionsExclusionPattern') }}
-      </span>
+      <span v-if="glossary" data-glossary="Domain Pattern" />
+      <span v-else>{{ getLabelTranslation() }}</span>
     </label>
-    <input :id="id" v-model="domainPattern" type="text" />
+    <input
+      :id="id"
+      v-model="domainPattern"
+      type="text"
+      :placeholder="getExamplePlaceholder()"
+    />
   </div>
 </template>

@@ -10,6 +10,7 @@ import {
   ClickType,
   ClickMessage,
   WebRequestOnBeforeRequestDetails,
+  IsolationDomain,
 } from '~/types';
 
 export class MouseClick {
@@ -100,7 +101,7 @@ export class MouseClick {
   ): boolean => {
     if (preferences.action === 'always') {
       this.debug(
-        '[checkClick] click handled based on preference "always"',
+        '[checkClickPreferences] click handled based on preference "always"',
         preferences
       );
       return true;
@@ -117,46 +118,46 @@ export class MouseClick {
     }
 
     if (preferences.action === 'notsamedomainexact') {
-      if (parsedSenderTabURL.hostname !== parsedClickedURL.hostname) {
-        this.debug(
-          '[checkClickPreferences] click handled based on preference "notsamedomainexact"',
-          preferences,
-          parsedClickedURL,
-          parsedSenderTabURL
-        );
-        return true;
-      } else {
-        this.debug(
-          '[checkClickPreferences] click not handled based on preference "notsamedomainexact"',
-          preferences,
-          parsedClickedURL,
-          parsedSenderTabURL
-        );
-        return false;
-      }
+      // if (parsedSenderTabURL.hostname !== parsedClickedURL.hostname) {
+      //   this.debug(
+      //     '[checkClickPreferences] click handled based on preference "notsamedomainexact"',
+      //     preferences,
+      //     parsedClickedURL,
+      //     parsedSenderTabURL
+      //   );
+      //   return true;
+      // } else {
+      //   this.debug(
+      //     '[checkClickPreferences] click not handled based on preference "notsamedomainexact"',
+      //     preferences,
+      //     parsedClickedURL,
+      //     parsedSenderTabURL
+      //   );
+      //   return false;
+      // }
     }
 
     if (preferences.action === 'notsamedomain') {
-      if (
-        this.utils.sameDomain(
-          parsedSenderTabURL.hostname,
-          parsedClickedURL.hostname
-        )
-      ) {
-        this.debug(
-          '[checkClickPreferences] click not handled from preference "notsamedomain"',
-          parsedClickedURL,
-          parsedSenderTabURL
-        );
-        return false;
-      } else {
-        this.debug(
-          '[checkClickPreferences] click handled from preference "notsamedomain"',
-          parsedClickedURL,
-          parsedSenderTabURL
-        );
-        return true;
-      }
+      // if (
+      //   this.utils.sameDomain(
+      //     parsedSenderTabURL.hostname,
+      //     parsedClickedURL.hostname
+      //   )
+      // ) {
+      //   this.debug(
+      //     '[checkClickPreferences] click not handled from preference "notsamedomain"',
+      //     parsedClickedURL,
+      //     parsedSenderTabURL
+      //   );
+      //   return false;
+      // } else {
+      //   this.debug(
+      //     '[checkClickPreferences] click handled from preference "notsamedomain"',
+      //     parsedClickedURL,
+      //     parsedSenderTabURL
+      //   );
+      //   return true;
+      // }
     }
 
     this.debug('[checkClickPreferences] this should never happen');
@@ -174,7 +175,7 @@ export class MouseClick {
     this.debug('[checkClick] checking click', type, message, sender);
 
     for (const domainPatternPreferences of this.pref.isolation.domain) {
-      const domainPattern = domainPatternPreferences.pattern;
+      const domainPattern = domainPatternPreferences.targetPattern;
       if (!this.utils.matchDomainPattern(tab.url, domainPattern)) {
         continue;
       }

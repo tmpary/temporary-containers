@@ -10,9 +10,7 @@ export class Statistics {
   private removedContainerCookiesCount = 0;
   private removedContainerHistoryCount = 0;
   private removedContentLength = 0;
-  private requests: {
-    [key: string]: { contentLength: number };
-  } = {};
+  private requests: Record<string, { contentLength: number }> = {};
 
   private background: TemporaryContainers;
   private debug: Debug;

@@ -137,7 +137,7 @@ export default mixins(mixin).extend({
       } catch (error) {
         this.$root.$emit(
           'showError',
-          `Exporting to file failed: ${error.toString()}`,
+          `Exporting to file failed: ${error?.toString()}`,
           { close: true }
         );
       }
@@ -169,7 +169,7 @@ export default mixins(mixin).extend({
       } catch (error) {
         this.$root.$emit(
           'showError',
-          `Exporting to Firefox Sync failed: ${error.toString()}`
+          `Exporting to Firefox Sync failed: ${error?.toString()}`
         );
       }
     },
@@ -193,7 +193,7 @@ export default mixins(mixin).extend({
       } catch (error) {
         this.$root.$emit(
           'showError',
-          `Importing from Firefox Sync failed: ${error.toString()}`
+          `Importing from Firefox Sync failed: ${error?.toString()}`
         );
       }
     },
@@ -301,7 +301,7 @@ export default mixins(mixin).extend({
       } catch (error) {
         this.$root.$emit(
           'showError',
-          `Wiping Firefox Sync failed: ${error.toString()}`
+          `Wiping Firefox Sync failed: ${error?.toString()}`
         );
       }
     },

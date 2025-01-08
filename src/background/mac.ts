@@ -30,12 +30,8 @@ export class MultiAccountContainers {
     [key: number]: CookieStoreId;
   } = {};
 
-  private confirmPage: {
-    [key: string]: ConfirmPage;
-  } = {};
-  private waitingForConfirmPage: {
-    [key: string]: WaitingForConfirmPage;
-  } = {};
+  private confirmPage: Record<string, ConfirmPage> = {};
+  private waitingForConfirmPage: Record<string, WaitingForConfirmPage> = {};
 
   private background: TemporaryContainers;
   private debug: Debug;

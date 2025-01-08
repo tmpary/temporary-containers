@@ -7,6 +7,8 @@ import { App } from '~/ui/root';
 import { mixin } from '~/ui/mixin';
 import { IsolationDomain } from '~/types';
 
+const excluded: Record<string, unknown> = {};
+
 const domainDefaults = {
   originPattern: '',
   targetPattern: '',
@@ -29,7 +31,7 @@ const domainDefaults = {
       action: 'global',
     },
   },
-  excluded: {},
+  excluded,
 };
 
 interface UIIsolationDomain extends IsolationDomain {
@@ -238,26 +240,38 @@ export default mixins(mixin).extend({
       this.resetDropdowns();
 
       if (!this.preferences.ui.expandPreferences) {
-        this.domain.always.action === domainDefaults.always.action
-          ? $('#isolationPerDomainAccordion').accordion('close', 0)
-          : $('#isolationPerDomainAccordion').accordion('open', 0);
+        if (this.domain.always.action === domainDefaults.always.action) {
+          $('#isolationPerDomainAccordion').accordion('close', 0);
+        } else {
+          $('#isolationPerDomainAccordion').accordion('open', 0);
+        }
 
-        this.domain.navigation.action === domainDefaults.navigation.action
-          ? $('#isolationPerDomainAccordion').accordion('close', 1)
-          : $('#isolationPerDomainAccordion').accordion('open', 1);
+        if (
+          this.domain.navigation.action === domainDefaults.navigation.action
+        ) {
+          $('#isolationPerDomainAccordion').accordion('close', 1);
+        } else {
+          $('#isolationPerDomainAccordion').accordion('open', 1);
+        }
 
-        this.domain.mouseClick.middle.action ===
-          domainDefaults.mouseClick.middle.action &&
-        this.domain.mouseClick.ctrlleft.action ===
-          domainDefaults.mouseClick.ctrlleft.action &&
-        this.domain.mouseClick.left.action ===
-          domainDefaults.mouseClick.left.action
-          ? $('#isolationPerDomainAccordion').accordion('close', 2)
-          : $('#isolationPerDomainAccordion').accordion('open', 2);
+        if (
+          this.domain.mouseClick.middle.action ===
+            domainDefaults.mouseClick.middle.action &&
+          this.domain.mouseClick.ctrlleft.action ===
+            domainDefaults.mouseClick.ctrlleft.action &&
+          this.domain.mouseClick.left.action ===
+            domainDefaults.mouseClick.left.action
+        ) {
+          $('#isolationPerDomainAccordion').accordion('close', 2);
+        } else {
+          $('#isolationPerDomainAccordion').accordion('open', 2);
+        }
 
-        !Object.keys(this.domain.excluded).length
-          ? $('#isolationPerDomainAccordion').accordion('close', 3)
-          : $('#isolationPerDomainAccordion').accordion('open', 3);
+        if (Object.keys(this.domain.excluded).length === 0) {
+          $('#isolationPerDomainAccordion').accordion('close', 3);
+        } else {
+          $('#isolationPerDomainAccordion').accordion('open', 3);
+        }
       }
     },
 

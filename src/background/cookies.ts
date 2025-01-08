@@ -31,9 +31,7 @@ export class Cookies {
     let tab;
     try {
       let cookieHeader;
-      let cookiesHeader: {
-        [key: string]: string;
-      } = {};
+      let cookiesHeader: Record<string, string> = {};
       let cookieHeaderChanged = false;
       for (const domainPattern in this.pref.cookies.domain) {
         if (!this.utils.matchDomainPattern(request.url, domainPattern)) {
@@ -88,17 +86,13 @@ export class Cookies {
             httpOnly:
               cookie.httpOnly === ''
                 ? undefined
-                : cookie.httpOnly === 'true'
-                ? true
-                : false,
+                : cookie.httpOnly === 'true',
             name: cookie.name,
             path: cookie.path || undefined,
             secure:
               cookie.secure === ''
                 ? undefined
-                : cookie.secure === 'true'
-                ? true
-                : false,
+                : cookie.secure === 'true',
             url: cookie.url,
             value: cookie.value || undefined,
             sameSite: cookie.sameSite || undefined,

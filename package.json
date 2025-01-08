@@ -41,8 +41,8 @@
     "p-queue": "6.4.0",
     "psl": "1.8.0",
     "sortablejs": "1.10.2",
-    "vue": "2.6.11",
-    "vuedraggable": "2.23.2"
+    "vue": "2.7.16",
+    "vuedraggable": "2.24.3"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
@@ -65,7 +65,7 @@
     "@types/sinon": "^9.0.4",
     "@types/sinon-chai": "^3.2.4",
     "@types/sinon-chrome": "^2.2.9",
-    "@vue/component-compiler-utils": "^3.1.2",
+    "@vue/component-compiler-utils": "3.3.0",
     "chai": "^4.2.0",
     "chai-deep-match": "^1.2.1",
     "copy-webpack-plugin": "^6.0.2",
@@ -98,8 +98,8 @@
     "tsconfig-paths-webpack-plugin": "^3.2.0",
     "typescript": "5.7.2",
     "typescript-eslint": "8.19.1",
-    "vue-hot-reload-api": "^2.3.4",
-    "vue-loader": "^15.9.2",
+    "vue-hot-reload-api": "2.3.4",
+    "vue-loader": "15.11.1",
     "vue-template-compiler": "2.7.16",
     "vue-typed-mixins": "^0.2.0",
     "web-ext": "^4.2.0",
